@@ -1,0 +1,44 @@
+.wrapper {
+	display: flex;
+}
+
+.formContainer {
+	padding: 40px 60px 16px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btn {
+	border: none;
+	background-color: var(--marine-blue);
+	color: var(--white);
+	padding: 8px 16px;
+	border-radius: 6px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.primary {
+	background-color: var(--marine-blue);
+	color: var(--white);
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.secondary {
+	background-color: transparent;
+	color: var(--gray);
+
+	&:hover {
+		color: var(--marine-blue);
+	}
+}

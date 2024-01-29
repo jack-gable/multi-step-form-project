@@ -1,0 +1,51 @@
+.wrapper {
+	list-style-type: none;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 0;
+	min-width: 440px;
+}
+
+.wrapper p {
+	padding: 0;
+}
+
+.wrapper li {
+	padding: 12px;
+	border: 1px solid var(--light-gray);
+	border-radius: 8px;
+	font-size: 0.8rem;
+}
+
+.wrapper li:has(input:checked) {
+	border: 1px solid var(--purple-blue);
+	background-color: var(--magnolia);
+}
+
+.wrapper label {
+	display: flex;
+	gap: 12px;
+	cursor: pointer;
+}
+
+input[type="checkbox"] {
+	cursor: pointer;
+	accent-color: var(--purple-blue);
+}
+
+.container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.label {
+	color: var(--marine-blue);
+	font-weight: 500;
+}
+
+.price {
+	color: var(--purple-blue);
+}

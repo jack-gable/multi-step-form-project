@@ -1,0 +1,28 @@
+.wrapper {
+	min-width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper h1 {
+	color: var(--marine-blue);
+	font-size: 2rem;
+}
+
+.wrapper p {
+	color: var(--gray);
+	padding-bottom: 24px;
+}
+
+.wrapper label {
+	color: var(--marine-blue);
+	padding-bottom: 6px;
+}
+
+.wrapper input {
+	margin-bottom: 16px;
+	padding: 6px 10px;
+	border: 1px solid var(--light-gray);
+	border-radius: 6px;
+	color: var(--gray);
+}

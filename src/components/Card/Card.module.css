@@ -1,0 +1,9 @@
+.wrapper {
+	background-color: var(--white);
+	width: 850px;
+	height: 550px;
+	border-radius: 16px;
+	padding: 16px;
+	display: flex;
+	justify-content: space-between;
+}
