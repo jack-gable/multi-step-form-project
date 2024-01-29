@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./CheckGroup.module.css";
 
-function CheckGroup({ values, addOns, setAddOns }) {
+function CheckGroup({ values, addOns, setAddOns, planToggle }) {
 	const id = React.useId();
 
 	return (
@@ -28,7 +28,9 @@ function CheckGroup({ values, addOns, setAddOns }) {
 									<span className={styles.label}>{label}</span>
 									<p>{desc}</p>
 								</div>
-								<span className={styles.price}>{`+${price}`}</span>
+								<span className={styles.price}>{`+$${price}${
+									planToggle === "monthly" ? "" : "0"
+								}/${planToggle === "monthly" ? "mo" : "yr"}`}</span>
 							</div>
 						</label>
 					</li>

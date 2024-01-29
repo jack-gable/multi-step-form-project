@@ -37,6 +37,10 @@
 .wrapper p {
 	padding: 0;
 	font-size: 0.8rem;
+
+	&:last-of-type {
+		color: var(--marine-blue);
+	}
 }
 
 .planTitle {

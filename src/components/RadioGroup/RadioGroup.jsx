@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./RadioGroup.module.css";
 
-function RadioGroup({ values, currentValue, handleChangeValue }) {
+function RadioGroup({ values, currentValue, handleChangeValue, planToggle }) {
 	const id = React.useId();
 
 	return (
@@ -25,7 +25,10 @@ function RadioGroup({ values, currentValue, handleChangeValue }) {
 							/>
 							<div>
 								<span className={styles.planTitle}>{label}</span>
-								<p>{price}</p>
+								<p>{`+$${price}${planToggle === "monthly" ? "" : "0"}/${
+									planToggle === "monthly" ? "mo" : "yr"
+								}`}</p>
+								<p>{planToggle === "monthly" ? "" : "2 months free"}</p>
 							</div>
 						</label>
 					</li>

@@ -1,0 +1,14 @@
+.wrapper {
+	min-width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.wrapper h1 {
+	color: var(--marine-blue);
+	font-size: 2rem;
+}
+
+.wrapper p {
+	color: var(--gray);
+}

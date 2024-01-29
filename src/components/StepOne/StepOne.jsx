@@ -17,6 +17,8 @@ function StepOne({ name, setName, email, setEmail, phone, setPhone }) {
 				onChange={(e) => {
 					setName(e.target.value);
 				}}
+				required
+				onInvalid={(e) => e.target.setCustomValidity("This field is required")}
 			/>
 			<label htmlFor={`email-${id}`}>Email Address</label>
 			<input
@@ -27,6 +29,8 @@ function StepOne({ name, setName, email, setEmail, phone, setPhone }) {
 				onChange={(e) => {
 					setEmail(e.target.value);
 				}}
+				required
+				onInvalid={(e) => e.target.setCustomValidity("This field is required")}
 			/>
 			<label htmlFor={`phone-${id}`}>Phone Number</label>
 			<input
@@ -37,6 +41,8 @@ function StepOne({ name, setName, email, setEmail, phone, setPhone }) {
 				onChange={(e) => {
 					setPhone(e.target.value);
 				}}
+				required
+				onInvalid={(e) => e.target.setCustomValidity("This field is required")}
 			/>
 		</section>
 	);

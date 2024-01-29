@@ -5,6 +5,8 @@ import StepList from "../StepList";
 import StepOne from "../StepOne";
 import StepTwo from "../StepTwo";
 import StepThree from "../StepThree";
+import Summary from "../Summary";
+import ThankYou from "../ThankYou";
 import RadioGroup from "../RadioGroup";
 import CheckGroup from "../CheckGroup";
 import PlanToggle from "../PlanToggle";
@@ -13,87 +15,45 @@ import advancedImg from "../../assets/images/icon-advanced.svg";
 import proImg from "../../assets/images/icon-pro.svg";
 import clsx from "clsx";
 
-const MONTH_PLANS = [
+const PLANS = [
 	{
 		value: "arcade",
 		label: "Arcade",
 		image: arcadeImg,
-		price: "$9/mo",
+		price: 9,
 	},
 	{
 		value: "advanced",
 		label: "Advanced",
 		image: advancedImg,
-		price: "$12/mo",
+		price: 12,
 	},
 	{
 		value: "pro",
 		label: "Pro",
 		image: proImg,
-		price: "$15/mo",
+		price: 15,
 	},
 ];
 
-const YEAR_PLANS = [
-	{
-		value: "arcade",
-		label: "Arcade",
-		image: arcadeImg,
-		price: "$90/yr",
-	},
-	{
-		value: "advanced",
-		label: "Advanced",
-		image: advancedImg,
-		price: "$120/yr",
-	},
-	{
-		value: "pro",
-		label: "Pro",
-		image: proImg,
-		price: "$150/yr",
-	},
-];
-
-const MONTH_ADD_ONS = [
+const ADD_ONS = [
 	{
 		value: "online",
 		label: "Online service",
 		desc: "Access to multiplayer games",
-		price: "$1/mo",
+		price: 1,
 	},
 	{
 		value: "large",
 		label: "Larger storage",
 		desc: "Extra 1TB of cloud save",
-		price: "$2/mo",
+		price: 2,
 	},
 	{
 		value: "custom",
 		label: "Customizable profile",
 		desc: "Custom theme on your profile",
-		price: "$2/mo",
-	},
-];
-
-const YEAR_ADD_ONS = [
-	{
-		value: "online",
-		label: "Online service",
-		desc: "Access to multiplayer games",
-		price: "$10/mo",
-	},
-	{
-		value: "large",
-		label: "Larger storage",
-		desc: "Extra 1TB of cloud save",
-		price: "$20/mo",
-	},
-	{
-		value: "custom",
-		label: "Customizable profile",
-		desc: "Custom theme on your profile",
-		price: "$20/mo",
+		price: 2,
 	},
 ];
 
@@ -111,11 +71,17 @@ function SignupForm() {
 	const [planToggle, setPlanToggle] = React.useState("monthly");
 	const [plan, setPlan] = React.useState(null);
 	const [addOns, setAddOns] = React.useState(initialAddOns);
+	const [openThankYou, setOpenThankYou] = React.useState(false);
 	const isFinalStep = step === 4;
 
-	function handleGoBack() {
-		const nextStep = step - 1;
-		setStep(nextStep);
+	function handleReset() {
+		setName("");
+		setEmail("");
+		setPhone("");
+		setPlan(null);
+		setAddOns(initialAddOns);
+		setPlanToggle("monthly");
+		setStep(1);
 	}
 
 	function handleSubmitForm(event) {
@@ -127,11 +93,25 @@ function SignupForm() {
 				window.alert("missing data");
 			}
 			// send data to server
-			return;
+			setOpenThankYou(true);
 		}
 
 		setStep(nextStep);
 	}
+
+	const selectedPlanData = PLANS.find((p) => p.value === plan);
+	let addOnsKeys = Object.values(addOns);
+	let selectedAddOnsData = [];
+	for (let i = 0; i < ADD_ONS.length; i++) {
+		if (addOnsKeys[i] === true) {
+			selectedAddOnsData.push(ADD_ONS[i]);
+		}
+	}
+	const initialValue = 0;
+	const addOnsTotal = selectedAddOnsData.reduce(
+		(acc, value) => acc + value.price,
+		initialValue
+	);
 
 	return (
 		<form onSubmit={handleSubmitForm}>
@@ -173,40 +153,84 @@ function SignupForm() {
 							setPhone={setPhone}
 						/>
 					)}
+
 					{step === 2 && (
 						<StepTwo>
 							<RadioGroup
-								values={planToggle === "monthly" ? MONTH_PLANS : YEAR_PLANS}
+								values={PLANS}
 								currentValue={plan}
 								handleChangeValue={(newValue) => {
 									setPlan(newValue);
 								}}
+								planToggle={planToggle}
 							/>
 							<PlanToggle plan={planToggle} setPlan={setPlanToggle} />
 						</StepTwo>
 					)}
+
 					{step === 3 && (
 						<StepThree>
 							<CheckGroup
-								values={planToggle === "monthly" ? MONTH_ADD_ONS : YEAR_ADD_ONS}
+								values={ADD_ONS}
 								addOns={addOns}
 								setAddOns={setAddOns}
+								planToggle={planToggle}
 							/>
 						</StepThree>
 					)}
-					<div className={styles.actions}>
-						<button
-							type="button"
-							className={clsx(styles.btn, styles.secondary)}
-							style={{ opacity: step >= 2 ? 1 : 0 }}
-							onClick={handleGoBack}
-						>
-							Go Back
-						</button>
-						<button className={clsx(styles.btn, styles.primary)}>
-							{isFinalStep ? "Confirm" : "Next Step"}
-						</button>
-					</div>
+
+					{step === 4 && (
+						<Summary>
+							<div className={styles.flexWrapper}>
+								<div className={styles.container}>
+									<div className={clsx(styles.flex, styles.plan)}>
+										<div>
+											<span>{`${selectedPlanData?.label} (${
+												planToggle === "monthly" ? "Monthly" : "Yearly"
+											})`}</span>
+										</div>
+										<span>{`$${selectedPlanData?.price}${
+											planToggle === "monthly" ? "" : "0"
+										}/${planToggle === "monthly" ? "mo" : "yr"}`}</span>
+									</div>
+									{selectedAddOnsData.map(({ value, label, price }) => (
+										<div key={value} className={styles.flex}>
+											<p>{label}</p>
+											<span>{`+${price}${planToggle === "monthly" ? "" : "0"}/${
+												planToggle === "monthly" ? "mo" : "yr"
+											}`}</span>
+										</div>
+									))}
+								</div>
+								<div className={clsx(styles.flex, styles.total)}>
+									<p>{`Total (per ${
+										planToggle === "monthly" ? "month" : "year"
+									})`}</p>
+									<span>{`$${selectedPlanData?.price + addOnsTotal}${
+										planToggle === "monthly" ? "" : "0"
+									}/${planToggle === "monthly" ? "mo" : "yr"}`}</span>
+								</div>
+							</div>
+						</Summary>
+					)}
+
+					{openThankYou && <ThankYou />}
+
+					{!openThankYou && (
+						<div className={styles.actions}>
+							<button
+								type="button"
+								className={clsx(styles.btn, styles.secondary)}
+								style={{ opacity: step >= 2 ? 1 : 0 }}
+								onClick={handleReset}
+							>
+								Reset
+							</button>
+							<button className={clsx(styles.btn, styles.primary)}>
+								{isFinalStep ? "Confirm" : "Next Step"}
+							</button>
+						</div>
+					)}
 				</div>
 			</Card>
 		</form>
