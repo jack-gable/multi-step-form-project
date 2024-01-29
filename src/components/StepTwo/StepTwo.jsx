@@ -1,4 +1,3 @@
-// import React from 'react';
 import styles from "./StepTwo.module.css";
 
 function StepTwo({ children }) {

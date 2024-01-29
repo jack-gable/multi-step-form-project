@@ -1,4 +1,3 @@
-// import React from 'react';
 import styles from "./ThankYou.module.css";
 import ThankYouImage from "../../assets/images/icon-thank-you.svg";
 
