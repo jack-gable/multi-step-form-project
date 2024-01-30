@@ -49,3 +49,9 @@ input[type="checkbox"] {
 .price {
 	color: var(--purple-blue);
 }
+
+@media (max-width: 550px) {
+	.wrapper {
+		min-width: auto;
+	}
+}

@@ -57,3 +57,23 @@ input[type="radio"] {
 	height: 35px;
 	border-radius: 50%;
 }
+
+@media (max-width: 550px) {
+	.wrapper {
+		grid-template-columns: none;
+		grid-template-rows: repeat(3, 1fr);
+		min-width: auto;
+	}
+
+	.wrapper li {
+		height: auto;
+		padding: 8px;
+	}
+
+	.wrapper label {
+		flex-direction: row;
+		justify-content: initial;
+		align-items: center;
+		gap: 12px;
+	}
+}

@@ -1,0 +1,94 @@
+.wrapper {
+	display: flex;
+}
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+}
+
+.btn {
+	border: none;
+	background-color: var(--marine-blue);
+	color: var(--white);
+	padding: 8px 16px;
+	border-radius: 6px;
+	font-size: 0.8rem;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.primary {
+	background-color: var(--marine-blue);
+	color: var(--white);
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+.secondary {
+	background-color: transparent;
+	color: var(--gray);
+
+	&:hover {
+		color: var(--marine-blue);
+	}
+}
+
+.flexWrapper {
+	display: flex;
+	flex-direction: column;
+	padding-top: 24px;
+	gap: 16px;
+	min-width: 440px;
+}
+
+.flex {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+
+	&:first-of-type {
+		border-bottom: 1px solid var(--light-gray);
+	}
+}
+
+.flex span {
+	color: var(--marine-blue);
+}
+
+.container {
+	background-color: var(--magnolia);
+	padding: 10px 20px 20px;
+	border-radius: 8px;
+}
+
+.total {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.total span {
+	color: var(--purple-blue);
+	font-weight: 700;
+}
+
+.plan {
+	color: var(--marine-blue);
+	font-weight: 700;
+}
+
+@media (max-width: 550px) {
+	.flexWrapper {
+		min-width: auto;
+	}
+
+	.actions {
+		background-color: var(--white);
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		padding: 12px;
+	}
+}
